@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Prediction System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Sales Prediction System</h1>
+
+    <div class="container">
+       <form method="POST" action="/">
+    <div class="field">
+        <label>TV advertising budget</label>
+        <input type="number" name="tv" min="0" max="300"
+               value="{{ request.form.tv if request.method=='POST' else '' }}"
+               placeholder="0 - 300" required>
+    </div>
+
+    <div class="field">
+        <label>Radio advertising budget</label>
+        <input type="number" name="radio" min="0" max="50"
+               value="{{ request.form.radio if request.method=='POST' else '' }}"
+               placeholder="0 - 50" required>
+    </div>
+
+    <div class="field">
+        <label>Newspaper advertising budget</label>
+        <input type="number" name="news" min="0" max="100"
+               value="{{ request.form.news if request.method=='POST' else '' }}"
+               placeholder="0 - 100" required>
+    </div>
+
+<div class="field center">
+    <button class="btn" type="submit">Predict</button>
+   <a href="/" class="reset-btn">Reset</a>
+
+</div>
+
+
+            {% if prediction %}
+            <div class="result">
+                Predicted Sales: {{ prediction | round(2) }}
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>
